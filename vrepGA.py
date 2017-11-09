@@ -18,3 +18,10 @@ if clientID != -1:
 else:
     print("Nao conectado ao VRep!!!")
     sys.exit("Xau!!")
+
+#Instancia objetos no Python para os handlers
+codErro, dummy = vrep.simxGetObjectHandle(clientID, 'dummy', operationMode=vrep.simx_opmode_oneshot)
+codErro, pioneerDistDetector = vrep.simxGetObjectHandle(clientID, 'pioneerDistDetect',
+                                                        operationMode=vrep.simx_opmode_oneshot)
+codErro, pioneerColDetector = vrep.simxGetObjectHandle(clientID, 'pioneerColDetect',
+                                                       operationMode=vrep.simx_opmode_oneshot)
