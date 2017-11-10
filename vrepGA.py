@@ -21,7 +21,15 @@ else:
 
 #Instancia objetos no Python para os handlers
 codErro, dummy = vrep.simxGetObjectHandle(clientID, 'dummy', operationMode=vrep.simx_opmode_oneshot)
-codErro, pioneerDistDetector = vrep.simxGetObjectHandle(clientID, 'pioneerDistDetect',
-                                                        operationMode=vrep.simx_opmode_oneshot)
-codErro, pioneerColDetector = vrep.simxGetObjectHandle(clientID, 'pioneerColDetect',
-                                                       operationMode=vrep.simx_opmode_oneshot)
+codErro, pioneerColDetect = vrep.simxGetCollisionHandle(clientID, 'pioneerColDetect#',
+                                                        operationMode=vrep.simx_opmode_blocking)
+codErro, pioneerDistDetect = vrep.simxGetDistanceHandle(clientID, 'pioneerDistDetect#',
+                                                        operationMode=vrep.simx_opmode_blocking)
+codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
+                                                   operationMode=vrep.simx_opmode_oneshot)
+codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
+                                         operationMode=vrep.simx_opmode_oneshot)
+
+posicao = vrep.simxGetObjectPosition(clientID,robo,-1,vrep.simx_opmode_blocking)
+
+print posicao
