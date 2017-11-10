@@ -30,6 +30,11 @@ codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
 codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
                                          operationMode=vrep.simx_opmode_oneshot)
 
-posicao = vrep.simxGetObjectPosition(clientID,robo,-1,vrep.simx_opmode_blocking)
+posicao = vrep.simxGetObjectPosition(clientID,robo,vrep.sim_handle_parent,vrep.simx_opmode_blocking)
+angulos = vrep.simxGetObjectOrientation(clientID, robo, -1, vrep.simx_opmode_blocking)
+distancia = vrep.simxReadDistance(clientID, pioneerDistDetect,
+                                  operationMode=vrep.simx_opmode_blocking)
 
-print posicao
+print posicao[1][1]
+print angulos[1][1]
+print distancia[1]
