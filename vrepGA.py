@@ -20,21 +20,33 @@ else:
     sys.exit("Xau!!")
 
 #Instancia objetos no Python para os handlers
+codErro, ref = vrep.simxGetObjectHandle(clientID, 'ref',
+                                        operationMode=vrep.simx_opmode_oneshot)
 codErro, dummy = vrep.simxGetObjectHandle(clientID, 'dummy', operationMode=vrep.simx_opmode_oneshot)
-codErro, pioneerColDetect = vrep.simxGetCollisionHandle(clientID, 'pioneerColDetect#',
+codErro, pioneerColDetect = vrep.simxGetCollisionHandle(clientID, 'pioneerColDetect',
                                                         operationMode=vrep.simx_opmode_blocking)
-codErro, pioneerDistDetect = vrep.simxGetDistanceHandle(clientID, 'pioneerDistDetect#',
+codErro, pioneerDistDetect = vrep.simxGetDistanceHandle(clientID, 'pioneerDistDetect',
                                                         operationMode=vrep.simx_opmode_blocking)
-codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
+codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos',
                                                    operationMode=vrep.simx_opmode_oneshot)
 codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
                                          operationMode=vrep.simx_opmode_oneshot)
+codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizableFloor_5_25',
+                                         operationMode=vrep.simx_opmode_oneshot)
 
-posicao = vrep.simxGetObjectPosition(clientID,robo,vrep.sim_handle_parent,vrep.simx_opmode_blocking)
-angulos = vrep.simxGetObjectOrientation(clientID, robo, -1, vrep.simx_opmode_blocking)
-distancia = vrep.simxReadDistance(clientID, pioneerDistDetect,
-                                  operationMode=vrep.simx_opmode_blocking)
 
-print posicao[1][1]
-print angulos[1][1]
-print distancia[1]
+posicao = vrep.simxGetObjectPosition(clientID,dummy,ref,vrep.simx_opmode_blocking)
+#angulos = vrep.simxGetObjectOrientation(clientID, robo, -1, vrep.simx_opmode_blocking)
+#distancia = vrep.simxReadDistance(clientID, pioneerDistDetect,
+                                  #operationMode=vrep.simx_opmode_blocking)
+
+time.sleep(3)
+
+codErroPosicao = vrep.simxSetObjectPosition(clientID, robo, ref, [2, 1, 0],
+                           operationMode=vrep.simx_opmode_blocking)
+
+print codErroPosicao
+
+print posicao
+#print angulos[1][1]
+#print distancia[1]
