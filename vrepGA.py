@@ -8,7 +8,7 @@ import time
 vrep.simxFinish(-1)
 
 # Faz a conexao com o Vrep
-clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)  # Connect to V-REP
+clientID = vrep.simxStart('192.168.11.7', 19999, True, True, 5000, 5)  # Connect to V-REP
 
 # Verifica se a conexao foi efetiva
 if clientID != -1:
@@ -29,12 +29,16 @@ codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
                                                    operationMode=vrep.simx_opmode_oneshot)
 codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
                                          operationMode=vrep.simx_opmode_oneshot)
+codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizablFloor_5_25',
+                                         operationMode=vrep.simx_opmode_oneshot)
 
-posicao = vrep.simxGetObjectPosition(clientID,robo,vrep.sim_handle_parent,vrep.simx_opmode_blocking)
-angulos = vrep.simxGetObjectOrientation(clientID, robo, -1, vrep.simx_opmode_blocking)
-distancia = vrep.simxReadDistance(clientID, pioneerDistDetect,
+time.sleep(3)
+
+posicao = vrep.simxGetObjectPosition(clientID, dummy, -1, vrep.simx_opmode_oneshot_wait)
+angulos = vrep.simxGetObjectOrientation(clientID, dummy, -1, vrep.simx_opmode_oneshot_wait)
+distancia = vrep.simxReadDistance(clientID, dummy,
                                   operationMode=vrep.simx_opmode_blocking)
 
-print posicao[1][1]
-print angulos[1][1]
+print posicao
+print angulos
 print distancia[1]
