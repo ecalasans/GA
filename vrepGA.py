@@ -41,9 +41,11 @@ posicao = vrep.simxGetObjectPosition(clientID,dummy,ref,vrep.simx_opmode_blockin
                                   #operationMode=vrep.simx_opmode_blocking)
 
 time.sleep(3)
+print posicao
 
-codErroPosicao = vrep.simxSetObjectPosition(clientID, robo, ref, [2, 1, 0],
-                           operationMode=vrep.simx_opmode_blocking)
+codErroPosicao = vrep.simxSetObjectPosition(clientID, dummy, ref, [1, 2, 0],
+                           operationMode=vrep.simx_opmode_oneshot)
+time.sleep(3)
 
 print codErroPosicao
 
