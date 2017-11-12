@@ -1,6 +1,5 @@
 import genetics
-valor = 5
 
-populacao = genetics.generatePopulation(valor)
+cromossomo = genetics.generateChromosome()
 
-print populacao[1]
+print cromossomo
