@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.spatial.distance as ssd
 
 #obstaculo 1
 x1 = np.linspace(0.75, 1.25, num=20)
@@ -113,7 +114,6 @@ for j in y1:
 OBS6 = [l1, l2, l3, l4]
 
 
-
 def distanciasPO(point):
     distMin = []
     indices = []
@@ -217,5 +217,11 @@ def distanciasPO(point):
     tempDist = []
 
     return distMin, indices
+
+def calculaCosseno(point, obst, target):
+    u = np.array(obst) - np.array(point)
+    v = np.array(target) - np.array(point)
+
+    return 1-ssd.cosine(u,v)
 
 
