@@ -1,9 +1,12 @@
 import numpy as np
 import genetics
 import obstaculos
+import scipy.spatial.distance as ssd
 
-teste = np.array([0.4, 1.9])
+u = np.array([0,0,0,3])
+v = np.array([0,0,3,3])
 
-dist = obstaculos.distanciasPO(teste)
+print np.dot(u,v)/(np.linalg.norm(u)*np.linalg.norm(v))
 
-print dist
+print np.rad2deg(np.arccos(1-ssd.cosine(u,v)))
+
