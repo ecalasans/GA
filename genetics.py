@@ -1,5 +1,5 @@
 import numpy as np
-import intervals as intervalo
+import scipy.spatial.distance as ssd
 import obstaculos
 
 def generateChromosome():
@@ -23,13 +23,22 @@ def generatePopulation(nIndividuals, tamInd):
 
     return pop
 
-def fitness(individuo, target):
+def fitness(individuo, start, target):
+    lenPath = obstaculos.distanciaPontos(start, individuo[0])
+    lenDistObst = 0
 
-    for cromossomo in individuo:
+    for i in range(1, len(individuo) - 1):
+        #Calcula a distancia do segmento ate o proximo ponto e adiciona a lenPath
+        lenPath += obstaculos.distanciaPontos(individuo[i], individuo[i+1])
 
-        distCT = np.linalg.norm(cromossomo - np.array(target))
+        #Calcula o cosseno entre o vetor
 
-        distCO = min(obstaculos.distanciaPO(cromossomo))
+
+
+
+
+
+
 
 
 

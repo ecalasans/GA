@@ -113,26 +113,33 @@ for j in y1:
 
 OBS6 = [l1, l2, l3, l4]
 
+def distanciaPontos(point, target):
+    return np.linalg.norm(target - point)
+
+
+
 
 def distanciasPO(point):
-    distMin = []
-    indices = []
-    temp = []
-    tempDist = []
+    distMin = []  #Matriz de distancias minimoas
+    indices = []  #Matriz de indices para o ponto no obstaculo onde tem distMin
+    temp = []  #Indices temporarios
+    tempDist = []  #Distancias temporarias
 
-    l = 1
-    for lado in OBS1:
-        distancias = []
-        for ponto in lado:
-            d = round(np.linalg.norm(np.array(point) - np.array(ponto)), 2)
-            distancias.append(d)
-        minDist = min(distancias)
-        temp.append([l, distancias.index(minDist)])
-        tempDist.append(minDist)
-        l += 1
-    minTempDist = min(tempDist)
-    distMin.append(minTempDist)
-    indices.append(temp[tempDist.index(minTempDist)])
+
+    l = 1  #Inicializa o lado do obstaculo
+
+    for lado in OBS1:  #Para um lado no obstaculo
+        distancias = [] #Matriz de distancias para um lado do obstaculo
+        for ponto in lado:   #Para um ponto no lado atual
+            d = round(np.linalg.norm(np.array(point) - np.array(ponto)), 2)  #Calcula a distancia do ponto ao lado
+            distancias.append(d)   #Inclui a distancia na matriz distancias
+        minDist = min(distancias)   #Calcula a menor das distancias do lado atual
+        temp.append([l, distancias.index(minDist)])   #Inclui o lado e o indice do ponto da menor distancia
+        tempDist.append(minDist)   #Inclui a menor distancia para o lado atual
+        l += 1  #Vai pro proximo lado
+    minTempDist = min(tempDist)  #Calcula a menor distancia entre os lados do obstaculo
+    distMin.append(minTempDist)  #Insere a menor distancia do obstaculo
+    indices.append(temp[tempDist.index(minTempDist)])  #Inclui o indice do lado e do ponto da menor distancia
     temp = []
     tempDist = []
 
@@ -213,15 +220,31 @@ def distanciasPO(point):
     minTempDist = min(tempDist)
     distMin.append(minTempDist)
     indices.append(temp[tempDist.index(minTempDist)])
-    temp = []
-    tempDist = []
 
-    return distMin, indices
+    resDistMin = min(distMin)
+
+    return resDistMin, "OBS" + str(distMin.index(resDistMin) + 1), indices[distMin.index(resDistMin)]
 
 def calculaCosseno(point, obst, target):
     u = np.array(obst) - np.array(point)
     v = np.array(target) - np.array(point)
 
-    return 1-ssd.cosine(u,v)
+    cosseno = 1 - ssd.cosine(u, v)
 
+    return cosseno, np.rad2deg(cosseno)  #retorna o cosseno e o angulo em graus
 
+def calculaVetorDistObst(point):
+    seletor = distanciasPO(point)[1]
+
+    if seletor == '0BS1':
+        obstaculo = OBS1
+    elif seletor == 'OBS2':
+        obstaculo = OBS2
+    elif seletor == 'OBS3':
+        obstaculo = OBS3
+    elif seletor == 'OBS4':
+        obstaculo = OBS4
+    elif seletor == 'OBS5':
+        obstaculo = OBS5
+    elif seletor == 'OBS6':
+        obstaculo = OBS6

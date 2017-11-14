@@ -35,15 +35,12 @@ codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizableFloor_5_25',
                                          operationMode=vrep.simx_opmode_oneshot)
 
 
-posicao = vrep.simxGetObjectPosition(clientID,dummy,ref,vrep.simx_opmode_blocking)
-#angulos = vrep.simxGetObjectOrientation(clientID, robo, -1, vrep.simx_opmode_blocking)
-#distancia = vrep.simxReadDistance(clientID, pioneerDistDetect,
-                                  #operationMode=vrep.simx_opmode_blocking)
+posicao = vrep.simxGetObjectPosition(clientID,dummy,-1,vrep.simx_opmode_blocking)
 
 time.sleep(3)
 print posicao
 
-codErroPosicao = vrep.simxSetObjectPosition(clientID, dummy, ref, [1, 2, 0],
+codErroPosicao = vrep.simxSetObjectPosition(clientID, dummy, -1, [1, 2, 0],
                            operationMode=vrep.simx_opmode_oneshot)
 time.sleep(3)
 

@@ -3,14 +3,23 @@ import genetics
 import obstaculos
 import scipy.spatial.distance as ssd
 
-a = np.array([0, 0])
-b = np.array([0,4])
-c = np.array([4, 6.9])
+"""
+a = range(0, 10)
 
-u = b-a
-v = c-a
+for i in range(0, len(a)):
+    print i
+"""
 
-print np.dot(u,v)/(np.linalg.norm(u)*np.linalg.norm(v))
-print 1-ssd.cosine(u, v)
 
-print np.rad2deg(np.arccos(1-ssd.cosine(u,v)))
+s = [2.4, 1.0]
+t = [4.2, 3.6]
+
+#individuo = genetics.generateIndividual(10)
+#print individuo
+
+#fitness = genetics.fitness(individuo, s, t)
+
+#print fitness
+
+dist = obstaculos.distanciasPO(t)
+print dist
