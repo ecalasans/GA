@@ -233,18 +233,33 @@ def calculaCosseno(point, obst, target):
 
     return cosseno, np.rad2deg(cosseno)  #retorna o cosseno e o angulo em graus
 
-def calculaVetorDistObst(point):
-    seletor = distanciasPO(point)[1]
+def calculaDistCosseno(point, obst, target):
+    u = np.array(obst) - np.array(point)
+    v = np.array(target) - np.array(point)
 
-    if seletor == '0BS1':
+    return ssd.cosine(u, v)
+
+def calculaPontoObst(point):
+    #Seleciona o obstaculo
+    seletorObst = distanciasPO(point)[1]
+
+    if seletorObst == '0BS1':
         obstaculo = OBS1
-    elif seletor == 'OBS2':
+    elif seletorObst == 'OBS2':
         obstaculo = OBS2
-    elif seletor == 'OBS3':
+    elif seletorObst == 'OBS3':
         obstaculo = OBS3
-    elif seletor == 'OBS4':
+    elif seletorObst == 'OBS4':
         obstaculo = OBS4
-    elif seletor == 'OBS5':
+    elif seletorObst == 'OBS5':
         obstaculo = OBS5
-    elif seletor == 'OBS6':
+    elif seletorObst == 'OBS6':
         obstaculo = OBS6
+
+    #Seleciona o lado
+    ladoObst = distanciasPO(point)[2][0]
+
+    #Seleciona o ponto no lado
+    pontoObst = distanciasPO(point)[2][1]
+
+    return obstaculo[ladoObst-1][pontoObst]

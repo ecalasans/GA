@@ -27,11 +27,21 @@ def fitness(individuo, start, target):
     lenPath = obstaculos.distanciaPontos(start, individuo[0])
     lenDistObst = 0
 
-    for i in range(1, len(individuo) - 1):
+    for cromossomo in range(1, len(individuo) - 1):
         #Calcula a distancia do segmento ate o proximo ponto e adiciona a lenPath
-        lenPath += obstaculos.distanciaPontos(individuo[i], individuo[i+1])
+        lenPath += obstaculos.distanciaPontos(individuo[cromossomo], individuo[cromossomo+1])
 
-        #Calcula o cosseno entre o vetor
+        #Calcula a distancia ate o obstaculo mais proximo do cromossomo e adiciona a lenDistObst
+        distCromObs = obstaculos.distanciasPO(individuo[cromossomo])[0]
+
+        #Calcula o cosseno entre a distancia ao obstaculo e a distancia ao target
+        pontoObst = obstaculos.calculaPontoObst(individuo[cromossomo])
+        distCosseno = obstaculos.calculaDistCosseno(individuo[cromossomo], pontoObst, target)
+
+        lenDistObst += distCromObs * distCosseno
+
+
+
 
 
 

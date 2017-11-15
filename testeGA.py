@@ -21,5 +21,6 @@ t = [4.2, 3.6]
 
 #print fitness
 
-dist = obstaculos.distanciasPO(t)
-print dist
+print ssd.cosine(s, t)
+print 1 - ssd.cosine(s, t)
+print np.rad2deg(np.arccos(1-ssd.cosine(s,t)))
