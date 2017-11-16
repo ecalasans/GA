@@ -14,13 +14,10 @@ for i in range(0, len(a)):
 s = [2.4, 1.0]
 t = [4.2, 3.6]
 
-#individuo = genetics.generateIndividual(10)
-#print individuo
+individuo = genetics.generateIndividual(10)
+print individuo
 
-#fitness = genetics.fitness(individuo, s, t)
+fitness = genetics.fitness(individuo, s, t)
 
-#print fitness
+print fitness
 
-print ssd.cosine(s, t)
-print 1 - ssd.cosine(s, t)
-print np.rad2deg(np.arccos(1-ssd.cosine(s,t)))
