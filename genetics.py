@@ -56,3 +56,5 @@ def fitness(individuo, start, target):
 
 
 
+
+

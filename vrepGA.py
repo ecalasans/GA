@@ -34,18 +34,21 @@ codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
 codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizableFloor_5_25',
                                          operationMode=vrep.simx_opmode_oneshot)
 
+codErro, motorE = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_blocking)
+codErro, motorD = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_blocking)
 
-posicao = vrep.simxGetObjectPosition(clientID,dummy,-1,vrep.simx_opmode_blocking)
 
-time.sleep(3)
-print posicao
+posX = vrep.simxGetFloatSignal(clientID, 'posX', vrep.simx_opmode_streaming)
+posY = vrep.simxGetFloatSignal(clientID, 'posY', vrep.simx_opmode_streaming)
 
-codErroPosicao = vrep.simxSetObjectPosition(clientID, dummy, -1, [1, 2, 0],
-                           operationMode=vrep.simx_opmode_oneshot)
-time.sleep(3)
+for i in range(0, 10000):
+    codErro = vrep.simxSetJointTargetVelocity(clientID, jointHandle=motorE, targetVelocity=0.2,
+                                              operationMode=vrep.simx_opmode_streaming)
+    codErro = vrep.simxSetJointTargetVelocity(clientID, jointHandle=motorD, targetVelocity=0.2,
+                                              operationMode=vrep.simx_opmode_streaming)
 
-print codErroPosicao
+    posX = vrep.simxGetFloatSignal(clientID, 'posX', vrep.simx_opmode_streaming)
+    posY = vrep.simxGetFloatSignal(clientID, 'posY', vrep.simx_opmode_streaming)
 
-print posicao
-#print angulos[1][1]
-#print distancia[1]
+    print posX, posY
+    time.sleep(1)
