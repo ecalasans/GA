@@ -44,8 +44,22 @@ def fitness(individuo, start, target):
 
     return lenDistObst/lenPath
 
+def roleta(populacao, start, target):
+    #Calcula um vetor de fitness dos individuos da populacao
+    fitPop = []
+    for individuo in populacao:
+        fitPop.append(fitness(individuo,start,target))
 
 
+    #Calcula a soma total das fitness
+
+    #Calcula a porcentagem de cada fitness individual em relacao a fitness total
+
+    #Calcula a posicao da agulha da roleta - numero entre 0 e 1 randomico
+
+    #Seleciona o individuo com base na posicao da agulha
+
+    return fitPop
 
 
 

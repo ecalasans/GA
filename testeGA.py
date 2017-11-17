@@ -10,12 +10,12 @@ for i in range(0, len(a)):
     print i
 """
 
+s = np.array([0.8, 1.4])
+t = np.array([3.5, 4])
 
-s = [2.4, 1.0]
-t = [4.2, 3.6]
+populacao = genetics.generatePopulation(10, 6)
 
+rol = genetics.roleta(populacao, s, t)
 
+print rol
 
-for i in range(0,10):
-    individuo = genetics.generateIndividual(5)
-    print genetics.fitness(individuo,s,t)
