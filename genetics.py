@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.spatial.distance as ssd
 import obstaculos
+from intervals import FloatInterval as fInterval
 
 def generateChromosome():
     x = np.random.uniform(0, 5, 1)
@@ -47,19 +48,27 @@ def fitness(individuo, start, target):
 def roleta(populacao, start, target):
     #Calcula um vetor de fitness dos individuos da populacao
     fitPop = []
+    porcFitness = []
+    porcFitnessIntervalo = []
     for individuo in populacao:
         fitPop.append(fitness(individuo,start,target))
 
-
-    #Calcula a soma total das fitness
+       #Calcula a soma total das fitness
+    sumFitness = sum(fitPop)
 
     #Calcula a porcentagem de cada fitness individual em relacao a fitness total
+    for fit in fitPop:
+        porcFitness.append(round(fit/sumFitness,2))
+
+    #Cria os intervalos da roleta
 
     #Calcula a posicao da agulha da roleta - numero entre 0 e 1 randomico
+    agulha = np.random.uniform(0, max(porcFitness),1)
+
 
     #Seleciona o individuo com base na posicao da agulha
 
-    return fitPop
+    return porcFitness, agulha
 
 
 
