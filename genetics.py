@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import numpy as np
 import scipy.spatial.distance as ssd
 import obstaculos
@@ -85,7 +86,7 @@ def crossover(indivA, indivB, ponto):
     crossAB = []     #Primeiro descendente
     crossBA = []     #Segundo descendente
 
-    #Gera o primeiro descendente
+    #Faz os cruzamentos
     for i in range(0, int(ponto)):
         crossAB.append(indivA[i])
         crossBA.append(indivB[i])
@@ -97,10 +98,17 @@ def crossover(indivA, indivB, ponto):
     return crossAB, crossBA
 
 
+def run(start, target, tamPop, tamIndividuo):
+    fitInicial = []
+    #Gere uma populacao de individuos aleatorios
+    print "Gerando população com " + str(tamPop) + " indivíduos..."
+    popIncial = generatePopulation(tamPop, tamIndividuo)
 
-
-
-
+    #Verifique a fitness de cada indivíduo da população inicial
+    print ""
+    print "Calculando a fitness inicial da população..."
+    for individuoInicial in popIncial:
+        fitInicial.append(fitness(individuo=individuoInicial, start=start, target=target))
 
 
 

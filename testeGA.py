@@ -15,11 +15,9 @@ import itertools
 #
 # print roleta
 
-populacao = genetics.generatePopulation(2, 5)
+s = np.array([0.3, 1.2])
+t = np.array([3.4, 3.9])
+tamPop = 100
+tamInd = 6
 
-print populacao[0]
-print populacao[1]
-
-c = genetics.crossover(populacao[0], populacao[1], np.floor(len(populacao[0])/2))
-
-print c
+genetics.run(start=s, target=t, tamPop=tamPop, tamIndividuo=tamInd)
