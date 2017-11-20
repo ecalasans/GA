@@ -20,4 +20,4 @@ t = np.array([3.4, 3.9])
 tamPop = 100
 tamInd = 6
 
-genetics.run(start=s, target=t, tamPop=tamPop, tamIndividuo=tamInd)
+genetics.run(start=s, target=t, tamPop=10, tamIndividuo=6, nGeracoes=2)
