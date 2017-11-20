@@ -78,6 +78,24 @@ def roleta(populacao, start, target):
 
     return populacao[resultado]
 
+def crossover(indivA, indivB, ponto):
+    #Calcula o ponto de corte do vetor
+    crossPonto = np.floor(len(indivA)/2)
+
+    crossAB = []     #Primeiro descendente
+    crossBA = []     #Segundo descendente
+
+    #Gera o primeiro descendente
+    for i in range(0, int(ponto)):
+        crossAB.append(indivA[i])
+        crossBA.append(indivB[i])
+
+    for j in range(int(ponto), len(indivA)):
+        crossAB.append(indivB[j])
+        crossBA.append(indivA[j])
+
+    return crossAB, crossBA
+
 
 
 

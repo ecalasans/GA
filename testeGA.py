@@ -3,20 +3,23 @@ import genetics
 import obstaculos
 import scipy.spatial.distance as ssd
 from intervals import FloatInterval
+import itertools
 
-"""
-a = range(0, 10)
+#
+# s = np.array([0.8, 1.4])
+# t = np.array([3.5, 4])
+#
+# populacao = genetics.generatePopulation(10, 6)
+#
+# roleta = genetics.roleta(populacao, s, t)
+#
+# print roleta
 
-for i in range(0, len(a)):
-    print i
-"""
+populacao = genetics.generatePopulation(2, 5)
 
-s = np.array([0.8, 1.4])
-t = np.array([3.5, 4])
+print populacao[0]
+print populacao[1]
 
-populacao = genetics.generatePopulation(10, 6)
+c = genetics.crossover(populacao[0], populacao[1], np.floor(len(populacao[0])/2))
 
-roleta = genetics.roleta(populacao, s, t)
-
-print roleta
-
+print c
