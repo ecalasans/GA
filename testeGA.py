@@ -2,6 +2,7 @@ import numpy as np
 import genetics
 import obstaculos
 import scipy.spatial.distance as ssd
+from intervals import FloatInterval
 
 """
 a = range(0, 10)
@@ -15,7 +16,7 @@ t = np.array([3.5, 4])
 
 populacao = genetics.generatePopulation(10, 6)
 
-rol = genetics.roleta(populacao, s, t)
+roleta = genetics.roleta(populacao, s, t)
 
-print rol
+print roleta
 

@@ -49,26 +49,36 @@ def roleta(populacao, start, target):
     #Calcula um vetor de fitness dos individuos da populacao
     fitPop = []
     porcFitness = []
-    porcFitnessIntervalo = []
+    sumFitness = 0
     for individuo in populacao:
-        fitPop.append(fitness(individuo,start,target))
+        fitIndividuo = fitness(individuo, start, target)
+        fitPop.append(fitIndividuo)
+        sumFitness += fitIndividuo
 
-       #Calcula a soma total das fitness
-    sumFitness = sum(fitPop)
+    #Calcula a soma total das fitness
+    #sumFitness = sum(fitPop)
 
     #Calcula a porcentagem de cada fitness individual em relacao a fitness total
     for fit in fitPop:
         porcFitness.append(round(fit/sumFitness,2))
 
-    #Cria os intervalos da roleta
+    # Calcula a posicao da agulha da roleta - numero entre 0 e 1 randomico
+    agulha = np.random.uniform(0, max(porcFitness), 1)/sumFitness
 
-    #Calcula a posicao da agulha da roleta - numero entre 0 e 1 randomico
-    agulha = np.random.uniform(0, max(porcFitness),1)
+    #Cria os intervalos da roleta e faz o giro
+    resultado = 0
+    a = 0
+    for porc in porcFitness:
+        b = a + porc
+        if float(agulha) in fInterval.closed(a, b):
+            break
+        else:
+            resultado += 1
+        a = b
+
+    return populacao[resultado]
 
 
-    #Seleciona o individuo com base na posicao da agulha
-
-    return porcFitness, agulha
 
 
 
