@@ -1,8 +1,10 @@
+# -*- coding:  UTF-8 -*-
 import numpy as np
 import vrep
 import sys
 import time
 import obstaculosVRep as oVrep
+import robotFunctions as RF
 
 
 # Encerra conexoes previas
@@ -28,7 +30,7 @@ codErro, pioneerColDetect = vrep.simxGetCollisionHandle(clientID, 'pioneerColDet
                                                         operationMode=vrep.simx_opmode_blocking)
 codErro, pioneerDistDetect = vrep.simxGetDistanceHandle(clientID, 'pioneerDistDetect',
                                                         operationMode=vrep.simx_opmode_blocking)
-codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos',
+codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
                                                    operationMode=vrep.simx_opmode_oneshot)
 codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
                                          operationMode=vrep.simx_opmode_oneshot)
@@ -38,6 +40,8 @@ codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizableFloor_5_25',
 codErro, motorE = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_blocking)
 codErro, motorD = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_blocking)
 
+codErro, colisao = vrep.simxReadCollision(clientID, pioneerColDetect,
+                                          operationMode=vrep.simx_opmode_streaming)
 
 posXR = vrep.simxGetFloatSignal(clientID, 'posXR', vrep.simx_opmode_streaming)
 posYR = vrep.simxGetFloatSignal(clientID, 'posYR', vrep.simx_opmode_streaming)
@@ -45,10 +49,6 @@ posYR = vrep.simxGetFloatSignal(clientID, 'posYR', vrep.simx_opmode_streaming)
 
 posX1 = vrep.simxGetFloatSignal(clientID, 'posX1', vrep.simx_opmode_streaming)
 posY1 = vrep.simxGetFloatSignal(clientID, 'posY1', vrep.simx_opmode_streaming)
-obs1 = [posX1[1], posY1[1]]
-
-time.sleep(3)
-print obs1
 
 posX2 = vrep.simxGetFloatSignal(clientID, 'posX2', vrep.simx_opmode_streaming)
 posY2 = vrep.simxGetFloatSignal(clientID, 'posY2', vrep.simx_opmode_streaming)
@@ -69,42 +69,10 @@ posY5 = vrep.simxGetFloatSignal(clientID, 'posY5', vrep.simx_opmode_streaming)
 posX6 = vrep.simxGetFloatSignal(clientID, 'posX6', vrep.simx_opmode_streaming)
 posY6 = vrep.simxGetFloatSignal(clientID, 'posY6', vrep.simx_opmode_streaming)
 
-for i in range(0, 10000):
-    posXR = vrep.simxGetFloatSignal(clientID, 'posXR', vrep.simx_opmode_buffer)
-    posYR = vrep.simxGetFloatSignal(clientID, 'posYR', vrep.simx_opmode_buffer)
 
+#Grava posição dos obstaculos
+mapaObstaculos = oVrep.carregaObstaculos(clientID)
+posRobo = RF.getRobotPosition(clientID)
 
-    posX1 = vrep.simxGetFloatSignal(clientID, 'posX1', vrep.simx_opmode_buffer)
-    posY1 = vrep.simxGetFloatSignal(clientID, 'posY1', vrep.simx_opmode_buffer)
-    obs1 = [posX1[1], posY1[1]]
-
-    posX2 = vrep.simxGetFloatSignal(clientID, 'posX2', vrep.simx_opmode_buffer)
-    posY2 = vrep.simxGetFloatSignal(clientID, 'posY2', vrep.simx_opmode_buffer)
-    obs2 = [posX2[1], posY2[1]]
-
-    posX3 = vrep.simxGetFloatSignal(clientID, 'posX3', vrep.simx_opmode_buffer)
-    posY3 = vrep.simxGetFloatSignal(clientID, 'posY3', vrep.simx_opmode_buffer)
-    obs3 = [posX3[1], posY3[1]]
-
-    posX4 = vrep.simxGetFloatSignal(clientID, 'posX4', vrep.simx_opmode_buffer)
-    posY4 = vrep.simxGetFloatSignal(clientID, 'posY4', vrep.simx_opmode_buffer)
-    obs4 = [posX4[1], posY4[1]]
-
-    posX5 = vrep.simxGetFloatSignal(clientID, 'posX5', vrep.simx_opmode_buffer)
-    posY5 = vrep.simxGetFloatSignal(clientID, 'posY5', vrep.simx_opmode_buffer)
-    obs5 = [posX5[1], posY5[1]]
-
-    posX6 = vrep.simxGetFloatSignal(clientID, 'posX6', vrep.simx_opmode_buffer)
-    posY6 = vrep.simxGetFloatSignal(clientID, 'posY6', vrep.simx_opmode_buffer)
-    obs6 = [posX6[1], posY6[1]]
-
-    obsCollection = [obs1, obs2, obs3, obs4, obs5, obs6]
-    mapaObstaculos = oVrep.carregaObstaculos(obsCollection)
-    print mapaObstaculos
-#
-#     codErro = vrep.simxSetJointTargetVelocity(clientID, jointHandle=motorE, targetVelocity=0,
-#                                               operationMode=vrep.simx_opmode_streaming)
-#     codErro = vrep.simxSetJointTargetVelocity(clientID, jointHandle=motorD, targetVelocity=0,
-#                                               operationMode=vrep.simx_opmode_streaming)
-#
-    time.sleep(1)
+print mapaObstaculos
+print posRobo
