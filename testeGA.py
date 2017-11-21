@@ -17,7 +17,7 @@ import itertools
 
 s = np.array([0.3, 1.2])
 t = np.array([3.4, 3.9])
-tamPop = 100
+tamPop = 5
 tamInd = 6
 
 genetics.run(start=s, target=t, tamPop=10, tamIndividuo=6, nGeracoes=2)
