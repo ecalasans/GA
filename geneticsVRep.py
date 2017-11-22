@@ -56,6 +56,9 @@ def roleta(populacao, start, target):
         fitPop.append(fitIndividuo)
         sumFitness += fitIndividuo
 
+    #Calcula a soma total das fitness
+    #sumFitness = sum(fitPop)
+
     #Calcula a porcentagem de cada fitness individual em relacao a fitness total
     for fit in fitPop:
         porcFitness.append(round(fit/sumFitness,2))
