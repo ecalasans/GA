@@ -25,17 +25,25 @@ else:
 #Instancia objetos no Python para os handlers
 codErro, ref = vrep.simxGetObjectHandle(clientID, 'ref',
                                         operationMode=vrep.simx_opmode_oneshot)
-codErro, dummy = vrep.simxGetObjectHandle(clientID, 'dummy', operationMode=vrep.simx_opmode_oneshot)
+
+#Destino
+codErro, target = vrep.simxGetObjectHandle(clientID, 'target', operationMode=vrep.simx_opmode_oneshot)
+
+#Medidores de colisão
 codErro, pioneerColDetect = vrep.simxGetCollisionHandle(clientID, 'pioneerColDetect',
                                                         operationMode=vrep.simx_opmode_blocking)
-codErro, pioneerDistDetect = vrep.simxGetDistanceHandle(clientID, 'pioneerDistDetect',
+
+#Medidores de distância
+codErro, roboObstDist = vrep.simxGetDistanceHandle(clientID, 'roboObstDistDetect',
                                                         operationMode=vrep.simx_opmode_blocking)
+codErro, roboTargetDist = vrep.simxGetDistanceHandle(clientID, 'roboTargetDistDetect',
+                                                     operationMode=vrep.simx_opmode_blocking)
+
 codErro, obstaculos = vrep.simxGetCollectionHandle(clientID, 'obstaculos#',
                                                    operationMode=vrep.simx_opmode_oneshot)
 codErro, robo = vrep.simxGetObjectHandle(clientID, 'Pionee_p3dx',
                                          operationMode=vrep.simx_opmode_oneshot)
-codErro, chao = vrep.simxGetObjectHandle(clientID, 'ResizableFloor_5_25',
-                                         operationMode=vrep.simx_opmode_oneshot)
+
 
 codErro, motorE = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_blocking)
 codErro, motorD = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_blocking)
@@ -74,5 +82,9 @@ posY6 = vrep.simxGetFloatSignal(clientID, 'posY6', vrep.simx_opmode_streaming)
 mapaObstaculos = oVrep.carregaObstaculos(clientID)
 posRobo = RF.getRobotPosition(clientID)
 
-print mapaObstaculos
-print posRobo
+distRO = vrep.simxReadDistance(clientID, roboObstDist, operationMode=vrep.simx_opmode_blocking)
+distRT = vrep.simxReadDistance(clientID, roboTargetDist, operationMode=vrep.simx_opmode_blocking)
+
+
+
+print distRO[1], distRT[1]

@@ -4,7 +4,7 @@ import vrep
 import time
 
 def carregaObstaculos(clientID):
-    obsCollection = None
+    global obsCollection = None
 
     for i in range(0, 2):
         posXR = vrep.simxGetFloatSignal(clientID, 'posXR', vrep.simx_opmode_buffer)
@@ -41,3 +41,4 @@ def carregaObstaculos(clientID):
         time.sleep(0.5)
 
     return obsCollection
+
