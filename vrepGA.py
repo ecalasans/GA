@@ -85,6 +85,5 @@ posRobo = RF.getRobotPosition(clientID)
 distRO = vrep.simxReadDistance(clientID, roboObstDist, operationMode=vrep.simx_opmode_blocking)
 distRT = vrep.simxReadDistance(clientID, roboTargetDist, operationMode=vrep.simx_opmode_blocking)
 
+print mapaObstaculos
 
-
-print distRO[1], distRT[1]

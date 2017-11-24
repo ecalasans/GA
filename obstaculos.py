@@ -94,8 +94,6 @@ for j in y1:
 
 OBS5 = [l1, l2, l3, l4]
 
-
-
 #obstaculo 6
 x1 = np.linspace(3.75, 4.25, num=20)
 y1 = np.linspace(2.75, 3.25, num=20)
@@ -139,7 +137,7 @@ def distanciasPO(point):
         tempDist.append(minDist)   #Inclui a menor distancia para o lado atual
     minTempDist = min(tempDist)  #Calcula a menor distancia entre os lados do obstaculo
     distMin.append(minTempDist)  #Insere a menor distancia do obstaculo
-    indices.append(temp[tempDist.index(minTempDist)])  #Inclui o indice do lado e do ponto da menor distancia
+    indices.append(temp[tempDist.index(minTempDist)])  #Inclui o indice do lado e a coordenada do ponto da menor distancia
     temp = []
     tempDist = []
 

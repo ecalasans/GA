@@ -94,8 +94,17 @@ def crossover(indivA, indivB, ponto):
 
     return crossAB, crossBA
 
+def mutacao(individuo):
+    mut = np.random.randint(0, len(individuo))
 
-def run(start, target, tamPop, tamIndividuo, nGeracoes):
+    temp = individuo[mut][0]
+    individuo[mut][0] = individuo[mut][1]
+    individuo[mut][1] = temp
+
+    mutante = individuo
+    return mutante
+
+def run(start, target, tamPop, tamIndividuo, nGeracoes, probMutacao):
     fitInicial = []
     proximaPopulacao = []
     fitnessIndividuo = 0
@@ -134,6 +143,12 @@ def run(start, target, tamPop, tamIndividuo, nGeracoes):
             proximaPopulacao.append(filhos[1])
 
         popIncial = proximaPopulacao
+
+        #Determina se vai haver alguma mutacão na população
+        probMut = np.random.randint(1,10,1)/100
+        if probMut == probMutacao:
+            mutante = np.random.randint(0, len(popIncial),1)
+            mutacao(popIncial[mutante])
 
         geracao += 1
 

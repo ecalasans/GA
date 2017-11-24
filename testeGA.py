@@ -15,9 +15,7 @@ import itertools
 #
 # print roleta
 
-s = np.array([0.3, 1.2])
-t = np.array([3.4, 3.9])
-tamPop = 5
-tamInd = 6
+s = np.array([0.4,1.4])
+t = np.array([3.4, 2.8])
 
-genetics.run(start=s, target=t, tamPop=10, tamIndividuo=6, nGeracoes=2)
+genetics.run(start=s, target=t, tamPop=10, tamIndividuo=6, nGeracoes=100, probMutacao=0.01)
